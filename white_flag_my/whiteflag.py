@@ -26,6 +26,8 @@ class Schema:
                 "Latest Social Media Post Date": "lastUpdated",
                 "Inactive?": "inactive",
                 "Schema Validated": "validated",
+                "Imported by User": "importedBy",
+                "Last Updated by User": "lastUpdatedBy",
             },
             "contact": {
                 "Contact Name": "name",

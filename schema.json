@@ -51,6 +51,12 @@
                 },
                 "inactive": {
                     "type": "boolean"
+                },
+                "importedBy": {
+                    "type": "string"
+                },
+                "updatedBy": {
+                    "type": "string"
                 }
             },
             "required": [
