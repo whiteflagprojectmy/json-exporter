@@ -1,0 +1,299 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/WhiteFlagProjectElement"
+    },
+    "definitions": {
+        "WhiteFlagProjectElement": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+                "meta": {
+                    "$ref": "#/definitions/meta"
+                },
+                "contact": {
+                    "$ref": "#/definitions/contact"
+                },
+                "location": {
+                    "$ref": "#/definitions/location"
+                },
+                "resource": {
+                    "$ref": "#/definitions/resource"
+                }
+            },
+            "required": [
+                "meta",
+                "contact",
+                "location",
+                "resource"
+            ],
+            "title": "WhiteFlagProjectElement"
+        },
+        "meta": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+                "recordId": {
+                    "type": "string"
+                },
+                "createdDatetime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "lastContacted": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "lastUpdated": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "inactive": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "recordId",
+                "createdDatetime"
+            ],
+            "title": "Meta"
+        },
+        "contact": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "pattern": "^\\+60\\d{2}-\\d{3}-\\d{3,6}"
+                    }
+                },
+                "additionalNotes": {
+                    "type": "string"
+                },
+                "preferredMethod": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "WhatsApp",
+                            "Call",
+                            "FB Message",
+                            "Instagram DM",
+                            "Twitter DM",
+                            "Email",
+                            "WeChat",
+                            "Other",
+                            "IRL Only"
+                        ]
+                    }
+                }
+            },
+            "required": [],
+            "title": "Contact"
+        },
+        "location": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "postcode": {
+                    "type": "string",
+                    "pattern": "\\d{5}"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string",
+                    "enum": [
+                        "Kuala Lumpur",
+                        "Selangor",
+                        "Johor",
+                        "Kedah",
+                        "Kelantan",
+                        "Labuan",
+                        "Malacca",
+                        "Negeri Sembilan",
+                        "Pahang",
+                        "Penang",
+                        "Perak",
+                        "Perlis",
+                        "Putrajaya",
+                        "Sabah",
+                        "Sarawak",
+                        "Terengganu",
+                        "Whole Country"
+                    ]
+                },
+                "latitude": {
+                    "type": "number",
+                    "minimum": 0.7,
+                    "maximum": 8
+                },
+                "longitude": {
+                    "type": "number",
+                    "minimum": 99,
+                    "maximum": 120
+                },
+                "operatingTime": {
+                    "type": "string"
+                },
+                "coversArea": {
+                    "type": "boolean"
+                }
+            },
+            "required": [],
+            "dependencies": {
+                "latitude": {
+                    "required": [
+                        "longitude"
+                    ]
+                },
+                "longitude": {
+                    "required": [
+                        "latitude"
+                    ]
+                }
+            },
+            "title": "Location"
+        },
+        "resource": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+                "businessName": {
+                    "type": "string"
+                },
+                "mustContactFirst": {
+                    "type": "boolean"
+                },
+                "hostOrganization": {
+                    "type": "string"
+                },
+                "launchDate": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "postUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "http",
+                        "https"
+                    ]
+                },
+                "endDate": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "offerings": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "Premade Meals",
+                            "Supply Packs",
+                            "Fresh Supplies",
+                            "Pet Supplies",
+                            "Counselling",
+                            "General Supplies",
+                            "Baby Supplies",
+                            "Other"
+                        ]
+                    }
+                },
+                "language": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "Malay",
+                            "English",
+                            "Chinese",
+                            "Tamil",
+                            "Other"
+                        ]
+                    }
+                },
+                "estimatedStock": {
+                    "type": "string",
+                    "enum": [
+                        "High",
+                        "Medium",
+                        "Low",
+                        "None"
+                    ]
+                },
+                "organizationScale": {
+                    "type": "string",
+                    "enum": [
+                        "Small",
+                        "Medium",
+                        "Large"
+                    ]
+                },
+                "accessMethod": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "Self-Service",
+                            "Arrange Pickup",
+                            "Home Delivery",
+                            "Online Only",
+                            "Organisations Only",
+                            "Other"
+                        ]
+                    }
+                },
+                "limitations": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "Non-Halal",
+                            "Region Locked",
+                            "Registration Required",
+                            "ID/Photo Required",
+                            "One-Off Offer",
+                            "Lottery System",
+                            "Other",
+                            "Intermittent Offer",
+                            "Appointment Required",
+                            "Packs per person"
+                        ]
+                    }
+                },
+                "additionalNotes": {
+                    "type": "string"
+                },
+                "religiousAffiliation": {
+                    "type": "string",
+                    "default": "Non-Affiliated",
+                    "enum": [
+                        "Muslim",
+                        "Buddhist",
+                        "Christian",
+                        "Hindu",
+                        "Non-Affiliated",
+                        "Other"
+                    ]
+                }
+            },
+            "required": [
+                "businessName",
+                "accessMethod",
+                "religiousAffiliation"
+            ],
+            "title": "Resource"
+        }
+    }
+}
