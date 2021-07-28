@@ -1,6 +1,6 @@
 [run]
 source = white_flag_my
-omit = white_flag_my/__main__.py
+omit = white_flag_my/__main__.py, white_flag_my/lambda_function.py
 
 [report]
 exclude_lines =
