@@ -1,8 +1,8 @@
 import copy
-import datetime as dt
 import json
 import math
 import re
+import time
 
 import jsonschema as js
 import jsonschema.exceptions as json_except
@@ -49,6 +49,7 @@ class Schema:
                 "Resource Name": "businessName",
                 "Must Contact First?": "mustContactFirst",
                 "Organisation Name": "hostOrganization",
+                "Organization Type": "organizationType",
                 "Launch URL Date": "launchDate",
                 "Launch URL": "postUrl",
                 "Resource End Date": "endDate",
@@ -59,7 +60,7 @@ class Schema:
                 "Other Limits": "limitations",
                 "Freeform Notes Misc": "additionalNotes",
                 "Religious Organisation?": "religiousAffiliation",
-                "Organization Scale": "organizationScale",
+                "Resource Size": "size",
             },
         }
 
@@ -151,6 +152,7 @@ def export_to_json(airtable, schema, df):  # pragma: no cover
     json_export = []
     json_dict = schema.get_json_dict()
     unnested_dict = schema.get_unnested_dict()
+    successful_record = []
 
     for record_id, row in df.iterrows():
 
@@ -178,8 +180,8 @@ def export_to_json(airtable, schema, df):  # pragma: no cover
                     .dropna()
                     .to_dict()
                 )
-                fields.update({"Schema Error": "", "Schema Validated": True})
                 airtable.update(record_id, fields)
+                successful_record.append(record_id)
 
         else:
             airtable.update(
@@ -187,6 +189,8 @@ def export_to_json(airtable, schema, df):  # pragma: no cover
                 {"Schema Error": issues, "Schema Validated": False},
             )
 
-    now = dt.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-    with open(f"./json_output/{now}-data.json", "w") as f:
-        f.write("[" + ",\n".join(json_export) + "]")
+    time.sleep(3)
+    for r in successful_record:
+        airtable.update(r, {"Schema Error": "", "Schema Validated": True})
+
+    return json.loads("[" + ",\n".join(json_export) + "]")

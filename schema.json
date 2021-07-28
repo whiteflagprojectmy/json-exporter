@@ -184,6 +184,21 @@
                 "hostOrganization": {
                     "type": "string"
                 },
+                "organizationType": {
+                    "type": "string",
+                    "enum": [
+                        "Business: SME",
+                        "Business: Large",
+                        "Religious",
+                        "Member of Parliament",
+                        "Government Affiliated",
+                        "Charity",
+                        "Community Org. (Rotary etc.)",
+                        "NGO",
+                        "Individual",
+                        "Other"
+                    ]
+                },
                 "launchDate": {
                     "type": "string",
                     "format": "date"
@@ -238,7 +253,7 @@
                         "None"
                     ]
                 },
-                "organizationScale": {
+                "size": {
                     "type": "string",
                     "enum": [
                         "Small",
@@ -296,8 +311,7 @@
             },
             "required": [
                 "businessName",
-                "accessMethod",
-                "religiousAffiliation"
+                "accessMethod"
             ],
             "title": "Resource"
         }

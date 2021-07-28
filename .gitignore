@@ -161,4 +161,10 @@ cython_debug/
 .history
 .ionide
 
+### AWS Lambda Stuff ###
+# Ignore downloaded package dependencies
+aws_lambda_wfp/*
+!aws_lambda_wfp/requirements.txt
+!aws_lambda_wfp/package_for_aws.sh
+
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode
